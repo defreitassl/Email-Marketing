@@ -1,0 +1,23 @@
+body {
+    background-color: #eaf0f6 !important;
+    background-image: url("../images/home_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#footer-content {
+    position: fixed;
+    bottom: 0;
+    right: 45%;
+    left: 45%;
+}
