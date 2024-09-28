@@ -1,7 +1,8 @@
 from flask import Flask
 from app.config.settings import Config
 from app.database import db
-from app.routes.home import home
+from app.routes.presentation import presentation
+from app.routes.learn_more import learn_more
 
 
 def create_app():
@@ -14,6 +15,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    app.register_blueprint(home)
+    app.register_blueprint(presentation)
+    app.register_blueprint(learn_more)
 
     return app
