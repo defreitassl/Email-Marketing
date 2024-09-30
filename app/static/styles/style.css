@@ -4,3 +4,24 @@ html {
     box-sizing: border-box;
 }
 
+body {
+    background-color: #eaf0f6 !important;
+    position: relative;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../images/baseTemplateBG.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px); 
+    z-index: -1; 
+}
