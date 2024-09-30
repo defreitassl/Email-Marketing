@@ -3,6 +3,7 @@ from app.config.settings import Config
 from app.database import db
 from app.routes.presentation import presentation
 from app.routes.learn_more import learn_more
+from app.routes.home import home
 
 
 def create_app():
@@ -17,5 +18,6 @@ def create_app():
 
     app.register_blueprint(presentation)
     app.register_blueprint(learn_more)
+    app.register_blueprint(home)
 
     return app
