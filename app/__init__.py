@@ -4,6 +4,7 @@ from app.database import db
 from app.routes.presentation import presentation
 from app.routes.learn_more import learn_more
 from app.routes.home import home
+from app.routes.clients import client
 
 
 def create_app():
@@ -19,5 +20,6 @@ def create_app():
     app.register_blueprint(presentation)
     app.register_blueprint(learn_more)
     app.register_blueprint(home)
+    app.register_blueprint(client)
 
     return app
