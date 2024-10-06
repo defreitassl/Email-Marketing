@@ -8,6 +8,7 @@
             <!-- Card de Instruções -->
             <div class="card shadow-lg mb-5">
                 <div class="card-body">
+                    
                     <h5 class="card-title mb-4">Escolha a Forma de Cadastrar Clientes</h5>
                     <p class="lead">
                         Você pode cadastrar seus clientes de três maneiras diferentes: manualmente, enviando uma lista de clientes em um arquivo CSV ou Excel, ou colando diretamente uma lista de clientes. Escolha abaixo o método que deseja utilizar para começar o cadastro.
@@ -29,12 +30,14 @@
             <!-- Card 1: Cadastro Manual -->
             <div id="form-manual" class="card shadow-lg mb-4">
                 <div class="card-body">
+                    
                     <h6 class="card-title">Cadastro Manual</h6>
                     <p class="small text-muted">Preencha os dados abaixo para cadastrar um cliente individualmente.</p>
-                    <form method="POST" action="/clients/register">
+                    
+                    <form action="/register" method="POST">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" name="nome" required>
+                            <input type="text" class="form-control" id="nome" name="name" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -42,50 +45,60 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
                     </form>
+
                 </div>
             </div>
 
             <!-- Card 2: Upload de Arquivo CSV -->
             <div id="form-csv" class="card shadow-lg mb-4 d-none">
                 <div class="card-body">
+                    
                     <h6 class="card-title">Importar Lista de Clientes (CSV)</h6>
                     <p class="small text-muted">Envie um arquivo CSV contendo nome e email de seus clientes.</p>
-                    <form method="POST" action="/clients/register" enctype="multipart/form-data">
+                    
+                    <form action="" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="csv-file" class="form-label">Arquivo CSV</label>
-                            <input type="file" class="form-control" id="csv-file" name="file" accept=".csv">
+                            <input type="file" class="form-control" id="csv-file" name="csxFile" accept=".csv">
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar CSV</button>
                     </form>
+
                 </div>
             </div>
 
             <!-- Card 3: Upload de Arquivo Excel -->
             <div id="form-excel" class="card shadow-lg mb-4 d-none">
                 <div class="card-body">
+                    
                     <h6 class="card-title">Importar Lista de Clientes (Excel)</h6>
                     <p class="small text-muted">Envie um arquivo Excel (.xlsx) contendo nome e email de seus clientes.</p>
-                    <form method="POST" action="/clients/register" enctype="multipart/form-data">
+                    
+                    <form action="" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="excel-file" class="form-label">Arquivo Excel</label>
-                            <input type="file" class="form-control" id="excel-file" name="file" accept=".xlsx">
+                            <input type="file" class="form-control" id="excel-file" name="xlFile" accept=".xlsx">
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar Excel</button>
                     </form>
+
                 </div>
             </div>
 
             <!-- Card 4: Inserção por Copiar e Colar -->
             <div id="form-paste" class="card shadow-lg mb-4 d-none">
                 <div class="card-body">
+                    
                     <h6 class="card-title">Inserção por Copiar e Colar</h6>
                     <p class="small text-muted">Cole uma lista de clientes, separando nome e email por vírgula, um cliente por linha.</p>
-                    <form method="POST" action="/clients/register">
+                    
+                    <form action="">
                         <div class="mb-3">
                             <textarea class="form-control" id="client-list" name="client-list" rows="5" placeholder="Exemplo:&#10;Maria Silva, maria@gmail.com&#10;João Santos, joao@gmail.com"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar Clientes</button>
                     </form>
+
                 </div>
             </div>
 
