@@ -8,13 +8,31 @@
             <!-- Card de Instruções -->
             <div class="card shadow-lg mb-5">
                 <div class="card-body">
+
+                    {% if get_flashed_messages(with_categories=True) %}
+                        {% for category, message in get_flashed_messages(with_categories=True) %}
+                            <div class="alert alert-{{ category }} alert-dismissible d-flex align-items-center" role="alert">
+
+                                {% if category == 'success' %}
+                                    <i class="bi bi-cloud-check me-3 fs-5"></i>
+                                {% else %}
+                                    <i class="bi bi-cloud-slash me-3 fs-5"></i>
+                                {% endif %}
+
+                                <div>
+                                    <strong>{{ message }}</strong>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     
                     <h5 class="card-title mb-4">Escolha a Forma de Cadastrar Clientes</h5>
                     <p class="lead">
                         Você pode cadastrar seus clientes de três maneiras diferentes: manualmente, enviando uma lista de clientes em um arquivo CSV ou Excel, ou colando diretamente uma lista de clientes. Escolha abaixo o método que deseja utilizar para começar o cadastro.
                     </p>
                     <p class="small text-muted">
-                        Para o cadastro, os únicos dados obrigatórios são o nome e o email. Para métodos em massa, siga os formatos apropriados listados para garantir que os dados sejam importados corretamente.
+                        Para o cadastro, os dados obrigatórios são o nome, sobrenome e email. Para métodos em massa, siga os formatos apropriados listados para garantir que os dados sejam importados corretamente. <span class="text-danger">Os arquivos CSV e Excel devem conter colunas separadas para nome, sobrenome e email.</span>
                     </p>
 
                     <!-- Botões para Escolher o Tipo de Cadastro -->
@@ -34,13 +52,17 @@
                     <h6 class="card-title">Cadastro Manual</h6>
                     <p class="small text-muted">Preencha os dados abaixo para cadastrar um cliente individualmente.</p>
                     
-                    <form action="/register" method="POST">
+                    <form action="/register/individual" method="POST">
                         <div class="mb-3">
-                            <label for="nome" class="form-label">Nome</label>
+                            <label for="nome" class="form-label">Nome:</label>
                             <input type="text" class="form-control" id="nome" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="sobrenome" class="form-label">Sobrenome:</label>
+                            <input type="text" class="form-control" id="sobrenome" name="surname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
@@ -54,7 +76,7 @@
                 <div class="card-body">
                     
                     <h6 class="card-title">Importar Lista de Clientes (CSV)</h6>
-                    <p class="small text-muted">Envie um arquivo CSV contendo nome e email de seus clientes.</p>
+                    <p class="small text-muted">Envie um arquivo CSV contendo nome, sobrenome e email de seus clientes. <span class="text-danger">As colunas devem seguir a ordem: nome, sobrenome, email.</span></p>
                     
                     <form action="" enctype="multipart/form-data">
                         <div class="mb-3">
@@ -72,7 +94,7 @@
                 <div class="card-body">
                     
                     <h6 class="card-title">Importar Lista de Clientes (Excel)</h6>
-                    <p class="small text-muted">Envie um arquivo Excel (.xlsx) contendo nome e email de seus clientes.</p>
+                    <p class="small text-muted">Envie um arquivo Excel (.xlsx) contendo nome, sobrenome e email de seus clientes. <span class="text-danger">As colunas devem seguir a ordem: nome, sobrenome, email.</span></p>
                     
                     <form action="" enctype="multipart/form-data">
                         <div class="mb-3">
@@ -90,11 +112,11 @@
                 <div class="card-body">
                     
                     <h6 class="card-title">Inserção por Copiar e Colar</h6>
-                    <p class="small text-muted">Cole uma lista de clientes, separando nome e email por vírgula, um cliente por linha.</p>
+                    <p class="small text-danger">Cole uma lista de clientes, separando nome, sobrenome e email por vírgula, um cliente por linha.</p>
                     
                     <form action="">
                         <div class="mb-3">
-                            <textarea class="form-control" id="client-list" name="client-list" rows="5" placeholder="Exemplo:&#10;Maria Silva, maria@gmail.com&#10;João Santos, joao@gmail.com"></textarea>
+                            <textarea class="form-control" id="client-list" name="client-list" rows="5" placeholder="Exemplo:&#10;Maria, Silva, maria@gmail.com&#10;João, Santos, joao@gmail.com"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar Clientes</button>
                     </form>
