@@ -2,8 +2,121 @@
 
 {% block conteudo %}
 
-    <div class="container-lg">
-        <h1>Clientes</h1>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!-- Card de Instruções -->
+            <div class="card shadow-lg mb-5">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Escolha a Forma de Cadastrar Clientes</h5>
+                    <p class="lead">
+                        Você pode cadastrar seus clientes de três maneiras diferentes: manualmente, enviando uma lista de clientes em um arquivo CSV ou Excel, ou colando diretamente uma lista de clientes. Escolha abaixo o método que deseja utilizar para começar o cadastro.
+                    </p>
+                    <p class="small text-muted">
+                        Para o cadastro, os únicos dados obrigatórios são o nome e o email. Para métodos em massa, siga os formatos apropriados listados para garantir que os dados sejam importados corretamente.
+                    </p>
+
+                    <!-- Botões para Escolher o Tipo de Cadastro -->
+                    <div class="d-grid gap-3 mt-4">
+                        <button class="btn btn-primary btn-lg  btn-select" onclick="showForm(event,'manual')">Cadastro Manual</button>
+                        <button class="btn btn-outline-primary btn-lg btn-select" onclick="showForm(event,'csv')">Importar Lista (CSV)</button>
+                        <button class="btn btn-outline-primary btn-lg btn-select" onclick="showForm(event,'excel')">Importar Lista (Excel)</button>
+                        <button class="btn btn-outline-primary btn-lg btn-select" onclick="showForm(event,'paste')">Inserção por Copiar e Colar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 1: Cadastro Manual -->
+            <div id="form-manual" class="card shadow-lg mb-4">
+                <div class="card-body">
+                    <h6 class="card-title">Cadastro Manual</h6>
+                    <p class="small text-muted">Preencha os dados abaixo para cadastrar um cliente individualmente.</p>
+                    <form method="POST" action="/clients/register">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card 2: Upload de Arquivo CSV -->
+            <div id="form-csv" class="card shadow-lg mb-4 d-none">
+                <div class="card-body">
+                    <h6 class="card-title">Importar Lista de Clientes (CSV)</h6>
+                    <p class="small text-muted">Envie um arquivo CSV contendo nome e email de seus clientes.</p>
+                    <form method="POST" action="/clients/register" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="csv-file" class="form-label">Arquivo CSV</label>
+                            <input type="file" class="form-control" id="csv-file" name="file" accept=".csv">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar CSV</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card 3: Upload de Arquivo Excel -->
+            <div id="form-excel" class="card shadow-lg mb-4 d-none">
+                <div class="card-body">
+                    <h6 class="card-title">Importar Lista de Clientes (Excel)</h6>
+                    <p class="small text-muted">Envie um arquivo Excel (.xlsx) contendo nome e email de seus clientes.</p>
+                    <form method="POST" action="/clients/register" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="excel-file" class="form-label">Arquivo Excel</label>
+                            <input type="file" class="form-control" id="excel-file" name="file" accept=".xlsx">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Excel</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card 4: Inserção por Copiar e Colar -->
+            <div id="form-paste" class="card shadow-lg mb-4 d-none">
+                <div class="card-body">
+                    <h6 class="card-title">Inserção por Copiar e Colar</h6>
+                    <p class="small text-muted">Cole uma lista de clientes, separando nome e email por vírgula, um cliente por linha.</p>
+                    <form method="POST" action="/clients/register">
+                        <div class="mb-3">
+                            <textarea class="form-control" id="client-list" name="client-list" rows="5" placeholder="Exemplo:&#10;Maria Silva, maria@gmail.com&#10;João Santos, joao@gmail.com"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Clientes</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>
+
+<script>
+    // Função para exibir o formulário correspondente
+    function showForm(event, type) {
+        // Ocultar todos os forms
+        document.getElementById('form-manual').classList.add('d-none');
+        document.getElementById('form-csv').classList.add('d-none');
+        document.getElementById('form-excel').classList.add('d-none');
+        document.getElementById('form-paste').classList.add('d-none');
+
+        // Exibir o formulário selecionado
+        document.getElementById('form-' + type).classList.remove('d-none');
+
+        // Remover cor de fundo de todos os botoes
+        const buttons = document.querySelectorAll(".btn-select")
+
+        for (button of buttons) {
+            button.classList.remove("btn-primary")
+            button.classList.add("btn-outline-primary")
+        }
+
+        // Colocar cor azul no botao
+        event.target.classList.remove("btn-outline-primary")
+        event.target.classList.add("btn-primary")
+    }
+</script>
 
 {% endblock %}
