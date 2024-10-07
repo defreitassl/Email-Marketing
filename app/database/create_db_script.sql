@@ -6,16 +6,14 @@ CREATE TABLE contacts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50),
-    email VARCHAR(100) UNIQUE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    email VARCHAR(100) UNIQUE NOT NULL
 );
 
 -- Criando a tabela 'contact_groups' para armazenar os grupos de contatos
 CREATE TABLE contact_groups (
     id INT AUTO_INCREMENT PRIMARY KEY,
     group_name VARCHAR(100) NOT NULL,
-    description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    description TEXT
 );
 
 -- Criando a tabela de associação 'contact_group_membership' para relacionar contatos e grupos (muitos para muitos)
@@ -32,8 +30,7 @@ CREATE TABLE email_templates (
     id INT AUTO_INCREMENT PRIMARY KEY,
     template_name VARCHAR(100) NOT NULL,
     subject VARCHAR(255) NOT NULL,
-    body TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    body TEXT NOT NULL
 );
 
 -- Criando a tabela 'email_campaigns' para armazenar as campanhas de email
