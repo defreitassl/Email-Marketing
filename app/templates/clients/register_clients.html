@@ -1,6 +1,6 @@
 {% extends "_model.html" %}
 
-{% block script %} <script src="../static/scripts/client.js"></script> {% endblock %}
+{% block script %} <script src="../static/scripts/register_client.js" defer></script> {% endblock %}
 
 {% block conteudo %}
 
@@ -31,10 +31,14 @@
                     
                     <h5 class="card-title mb-4">Escolha a Forma de Cadastrar Clientes</h5>
                     <p class="lead">
-                        Você pode cadastrar seus clientes de três maneiras diferentes: manualmente, enviando uma lista de clientes em um arquivo CSV ou Excel, ou colando diretamente uma lista de clientes. Escolha abaixo o método que deseja utilizar para começar o cadastro.
+                        Você pode cadastrar seus clientes de três maneiras diferentes: manualmente, enviando uma lista de clientes 
+                        em um arquivo CSV ou Excel, ou colando diretamente uma lista de clientes. Escolha abaixo o método que deseja 
+                        utilizar para começar o cadastro.
                     </p>
                     <p class="small text-muted">
-                        Para o cadastro, os dados obrigatórios são o nome, sobrenome e email. Para métodos em massa, siga os formatos apropriados listados para garantir que os dados sejam importados corretamente. <span class="text-danger">Os arquivos CSV e Excel devem conter colunas separadas para nome, sobrenome e email.</span>
+                        Para o cadastro, os dados obrigatórios são o nome, sobrenome, email e a categoria. Para métodos em massa, siga 
+                        os formatos apropriados listados para garantir que os dados sejam importados corretamente. 
+                        <span class="text-danger">Os arquivos CSV e Excel devem conter colunas separadas para nome, sobrenome, email e categoria.</span>
                     </p>
 
                     <!-- Botões para Escolher o Tipo de Cadastro -->
@@ -54,19 +58,49 @@
                     <h6 class="card-title">Cadastro Manual</h6>
                     <p class="small text-muted">Preencha os dados abaixo para cadastrar um cliente individualmente.</p>
                     
-                    <form action="/register/individual" method="POST">
+                    <form action="/register/client/individual" class="needs-validation" method="POST" novalidate>
                         <div class="mb-3">
+                            
                             <label for="nome" class="form-label">Nome:</label>
                             <input type="text" class="form-control" id="nome" name="name" required>
+                            <div class="invalid-feedback">
+                                Preencha todos os campos para continuar...
+                            </div>
+
                         </div>
                         <div class="mb-3">
+
                             <label for="sobrenome" class="form-label">Sobrenome:</label>
                             <input type="text" class="form-control" id="sobrenome" name="surname" required>
+                            <div class="invalid-feedback">
+                                Preencha todos os campos para continuar...
+                            </div>
+
                         </div>
                         <div class="mb-3">
+
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="invalid-feedback">
+                                Insira um email válido para continuar...
+                            </div>
+
                         </div>
+                        <div class="row justify-content-center">
+                            
+                            <div class="col mb-3">
+                                <label for="categoryInput" class="form-label">Cadastrar categoria:</label>
+                                <input type="text" class="form-control" id="categoryInput" name="categoryInput" placeholder="Caso deseje inserir uma nova categoria">
+                            </div>
+                            <div class="col mb-3">
+                                <label for="category" class="form-label">Selecionar categoria:</label>
+                                <select name="categorySelect" id="category" class="form-select">
+                                    <option selected disabled>Selecione uma categoria já registrada</option>
+                                </select>
+                            </div>
+
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
                     </form>
 

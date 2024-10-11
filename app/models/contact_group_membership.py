@@ -8,7 +8,7 @@ class ContactGroupMembership(db.Model):
     contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id'), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('contact_groups.id'), nullable=False)
 
-    contact = db.relationship('Contact', backref='memberships')
+    contact = db.relationship('Contacts', backref='memberships')
     group = db.relationship('ContactGroup', backref='memberships')
 
     def __repr__(self):

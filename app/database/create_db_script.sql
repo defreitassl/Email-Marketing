@@ -12,8 +12,7 @@ CREATE TABLE contacts (
 -- Criando a tabela 'contact_groups' para armazenar os grupos de contatos
 CREATE TABLE contact_groups (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    group_name VARCHAR(100) NOT NULL,
-    description TEXT
+    group_name VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Criando a tabela de associação 'contact_group_membership' para relacionar contatos e grupos (muitos para muitos)
