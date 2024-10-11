@@ -3,12 +3,13 @@ from sqlalchemy.exc import IntegrityError
 from ..models.contacts import Contacts
 from ..database import db
 
+
 client = Blueprint('client', __name__)
 
 
 @client.route('/clients')
 def clients_route():
-    return render_template('clients.html')
+    return render_template('clients/register_clients.html')
 
 
 @client.route('/register/individual', methods=['POST',])
