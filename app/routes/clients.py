@@ -21,7 +21,9 @@ client = Blueprint('client', __name__)
 
 @client.route('/register/client')
 def clients_route():
-    return render_template('clients/register_clients.html')
+
+    groups = db.session.query(ContactGroup).all()
+    return render_template('clients/register_clients.html', groups=groups)
 
 
 @client.route('/register/client/individual', methods=['POST',])
@@ -39,20 +41,19 @@ def register_client():
             db.session.add(new_contact)
 
             if group_name:
-                print('ok')
                 group = ContactGroup(group_name=group_name)
                 db.session.add(group)
             else:
-                print('erro')
                 group_name = request.form['categorySelect']
                 group = db.session.query(ContactGroup).filter_by(group_name=group_name).first()
 
             db.session.flush()
             group_association = associate_contact_and_group(contact=new_contact, group=group)
 
-            db.session.add(group_association)
-            db.session.commit()
+            if group_association:
+                db.session.add(group_association)
 
+            db.session.commit()
             flash('Cliente cadastrado com sucesso!', 'success')
         
         else:

@@ -96,6 +96,9 @@
                                 <label for="category" class="form-label">Selecionar categoria:</label>
                                 <select name="categorySelect" id="category" class="form-select">
                                     <option selected disabled>Selecione uma categoria já registrada</option>
+                                    {% for group in groups %}
+                                        <option>{{ group.group_name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
 
