@@ -15,9 +15,7 @@ def associate_contact_and_group(contact: Contacts, group: ContactGroup) -> Conta
 
     return association
 
-
 client = Blueprint('client', __name__)
-
 
 @client.route('/register/client')
 def clients_route():
